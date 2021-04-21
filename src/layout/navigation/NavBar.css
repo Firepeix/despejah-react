@@ -1,0 +1,41 @@
+footer {
+    background: #ff828b;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 70px;
+}
+
+footer > div {
+    display: flex;
+    padding: 0 0 6px 0;
+    align-items: center;
+    width: 33%;
+    flex-direction: column;
+}
+
+footer .main {
+    background: #ff4a57;
+    border-radius: 100%;
+    justify-content: center;
+    width: 80px;
+    height: 71px;
+    margin: 0 0 46px 0;
+    display: none;
+}
+
+footer .main.active {
+    display: flex;
+}
+
+footer .icon {
+    width: 33px;
+    color: white !important;
+}
