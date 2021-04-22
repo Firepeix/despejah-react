@@ -1,30 +1,24 @@
 import React from 'react';
 import './NavBar.css';
 import { home, plus, list, checkBold } from '../../../src/icons/icons';
+import NavButton from '../interaction/buttons/NavButton';
+import Home from '../../pages/Home';
+import Expenses from '../../pages/Expenses';
+import NewExpense from '../../pages/NewExpense';
 
-class NavBar extends React.Component {
+export default class NavBar extends React.Component {
+  changePages = (page) => {
+    this.props.changePage(page)
+  }
+
   render () {
     return (
       <footer>
-        <div>
-          <img src={home} alt="Home" className="icon"/>
-          <span className="title">Home</span>
-        </div>
-        <div className="main active ripple" id="main-button">
-          <img src={plus} alt="Home" className="icon"/>
-          <span className="title">Despesa</span>
-        </div>
-        <div className="main" id="submit-expense">
-          <img src={checkBold} alt="Home" className="icon"/>
-          <span className="title">Salvar</span>
-        </div>
-        <div>
-          <img src={list} alt="Home" className="icon"/>
-          <span className="title">Lista</span>
-        </div>
+        <NavButton onClick={() => this.changePages(Home)} icon={home} title={'Home'}/>
+        <NavButton onClick={() => this.changePages(NewExpense)} icon={plus} main={true} title={'Despesa'} />
+        <NavButton icon={checkBold} main={true} active={false} title={'Salvar'} />
+        <NavButton onClick={() => this.changePages(Expenses)} icon={list} title={'Lista'} />
       </footer>
     );
   }
 }
-
-export default NavBar;
