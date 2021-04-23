@@ -85,3 +85,111 @@ form input, form select {
   width: 100%;
   border-radius: 0;
 }
+
+.error {
+  padding-top: 3px;
+  color: red;
+  text-align: left;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+}
+
+.list > div:not(:first-child) {
+  margin-top: 15px;
+}
+
+
+.flex {
+  display: flex;
+}
+
+.flex.column {
+  flex-direction: column;
+}
+
+.content-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.subtitle {
+  font-weight: 600;
+  color: #a4a4a4;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.sad-face {
+  width: 50%;
+  max-width: 170px;
+}
+
+.badge {
+  text-transform: uppercase;
+  color: white;
+  border-radius: 8px;
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.badge.success {
+  background: #7fe1ad;
+}
+
+.badge.negative {
+  background: #de4343;
+}
+
+.menu {
+  list-style: none;
+  overflow: hidden;
+  background-color: white;
+  padding: 0;
+  text-align: center;
+  -webkit-transition: height 0.3s ease;
+  transition: height 0.3s ease;
+  position: absolute;
+  margin: 15px 20px 0 0;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 20%), 0 2px 2px rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%);
+  z-index: 3;
+}
+
+.menu.closed {
+  height: 0 !important;
+}
+
+.menu li {
+  display: block;
+  color: black;
+  text-decoration: none;
+  padding: 10px 20px 10px 10px;
+}
+
+.menu li:not(:last-child) {
+  border-bottom: solid 1px #ebebeb;
+}
+
+.menu li img{
+  margin-right: 6px;
+}

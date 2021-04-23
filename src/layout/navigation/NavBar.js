@@ -15,8 +15,8 @@ export default class NavBar extends React.Component {
     return (
       <footer>
         <NavButton onClick={() => this.changePages(Home)} icon={home} title={'Home'}/>
-        <NavButton onClick={() => this.changePages(NewExpense)} icon={plus} main={true} title={'Despesa'} />
-        <NavButton icon={checkBold} main={true} active={false} title={'Salvar'} />
+        <NavButton onClick={() => this.changePages(NewExpense)} icon={plus} main={true} active={this.props.mainButton === 'newExpense'} title={'Despesa'} />
+        <NavButton onClick={() => this.props.dispatchMainButtonClicked()} icon={checkBold} main={true} active={this.props.mainButton === 'saveExpense'} title={'Salvar'} />
         <NavButton onClick={() => this.changePages(Expenses)} icon={list} title={'Lista'} />
       </footer>
     );

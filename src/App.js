@@ -1,13 +1,21 @@
 import React from 'react';
 import './App.css';
 import MainLayout from './layout/MainLayout';
+import ExpenseTypeService from './services/ExpenseTypeService';
+import ExpenseService from './services/ExpenseService';
 
-function App() {
-  return (
-    <div className="App">
-      <MainLayout />
-    </div>
-  );
-}
+export default class App extends React.Component{
+  constructor (props) {
+    super(props);
+    this.expenseServiceType = new ExpenseTypeService()
+    this.expenseService = new ExpenseService()
+  }
 
-export default App;
+  render() {
+    return (
+      <div className="App">
+        <MainLayout expenseService={this.expenseService} expenseTypeService={this.expenseServiceType} />
+      </div>
+    );
+  }
+};

@@ -1,32 +1,51 @@
 import React from 'react';
 import Header from './section/Header';
 import NavBar from './navigation/NavBar';
-import NewExpense from '../pages/NewExpense';
+import Expenses from '../pages/Expenses';
 
-class MainLayout extends React.Component {
+export default class MainLayout extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      page: NewExpense
-    }
+      page: Expenses,
+      mainButton: 'newExpense',
+      mainButtonAction: null
+    };
   }
 
   changePage = page => {
-    this.setState({ page })
+    this.setState({ page });
+  };
+
+  changeMainButton = (mainButton, mainButtonAction = null) => {
+    this.setState({ mainButton, mainButtonAction });
+  };
+
+  mainButtonClicked = () => {
+    if (this.state.mainButtonAction !== null) {
+      this.state.mainButtonAction();
+    }
+  };
+
+  getPageProps () {
+    return {
+      expenseTypeService: this.props.expenseTypeService,
+      changeMainButton: this.changeMainButton,
+      expenseService: this.props.expenseService,
+      changePage: this.changePage
+    };
   }
 
   render () {
-    const page = React.createElement(this.state.page)
+    const page = React.createElement(this.state.page, this.getPageProps());
     return (
       <div>
-        <Header />
+        <Header/>
         <main>
           {page}
         </main>
-        <NavBar changePage={this.changePage}/>
+        <NavBar changePage={this.changePage} dispatchMainButtonClicked={this.mainButtonClicked} mainButton={this.state.mainButton}/>
       </div>
-    )
+    );
   }
 }
-
-export default MainLayout
