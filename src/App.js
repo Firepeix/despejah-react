@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import MainLayout from './layout/MainLayout';
+import MainLayout from './layout/MainLayout.jsx';
 import ExpenseTypeService from './services/ExpenseTypeService';
 import ExpenseService from './services/ExpenseService';
 

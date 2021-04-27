@@ -5,15 +5,16 @@ import DatePrimitive from '../Primitives/DatePrimitive';
 import NumberPrimitive from '../Primitives/NumberPrimitive';
 import Home from './Home';
 import AlertPrimitive from '../Primitives/AlertPrimitive';
+import Expenses from './Expenses';
 
 export default class NewExpense extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      name: '',
-      type: '',
-      date: '',
-      amount: '0,00',
+      name: !this.hasSavedExpense ? '' : this.props.savedExpense.name,
+      type: !this.hasSavedExpense ? '' : this.props.savedExpense.typeId,
+      date: !this.hasSavedExpense ? '' : DatePrimitive.toEURDateString(this.props.savedExpense.date),
+      amount: !this.hasSavedExpense ? '0,00' : NumberPrimitive.toReal(this.props.savedExpense.amount),
       errors: {
         name: null,
         type: null,
@@ -23,8 +24,19 @@ export default class NewExpense extends React.Component {
     };
   }
 
+  get hasSavedExpense () {
+    return this.props.savedExpense !== null && this.props.savedExpense !== undefined;
+  }
+
   get savedExpenseId () {
+    if (this.hasSavedExpense) {
+      return this.props.savedExpense.id
+    }
     return null
+  }
+
+  static title (props) {
+    return props.savedExpense !== null && props.savedExpense !== undefined ? 'Despesa' : 'Nova Despesa'
   }
 
   handleInput = (element, name, value) => {
@@ -44,7 +56,9 @@ export default class NewExpense extends React.Component {
     if (this.validate()) {
       const expense = this.props.expenseService.makeExpense(this.savedExpenseId, this.state.name, this.state.type, this.state.date, this.state.amount);
       this.props.expenseService.saveExpense(expense);
-      AlertPrimitive.success('Despesa salva com sucesso!', () => this.props.changePage(Home));
+      const message = this.hasSavedExpense ? 'Despesa editada com sucesso!' : 'Despesa salva com sucesso!'
+      const page = !this.hasSavedExpense ? Home : Expenses
+      AlertPrimitive.success(message, () => this.props.changePage(page));
     }
   };
 

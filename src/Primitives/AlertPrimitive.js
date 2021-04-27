@@ -1,5 +1,6 @@
 import sweetAlert from 'sweetalert2'
-
+import NumberPrimitive from './NumberPrimitive';
+import SimpleMaskMoney from 'simple-mask-money'
 export default class AlertPrimitive {
   /**
    * Função que exibe o SweetAlert2 para o usuario de forma generica
@@ -21,5 +22,28 @@ export default class AlertPrimitive {
    */
   static success (message, onClose = null) {
     AlertPrimitive.alert('success', 'Sucesso', message, 1800, onClose);
+  }
+
+  static updateExpenseType (limit, onClose = null) {
+    sweetAlert.fire({
+      title: 'Insira novo limite.',
+      input: 'text',
+      inputValue: NumberPrimitive.toReal(limit),
+      inputAttributes: {
+        inputmode: 'numeric'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Salvar',
+      cancelButtonText: 'Cancelar',
+      didOpen: function () {
+        SimpleMaskMoney.setMask('.swal2-input');
+      }
+    }).then(function (result) {
+      if (result.isConfirmed) {
+        if (onClose !== null) {
+          onClose(NumberPrimitive.toInt(result.value))
+        }
+      }
+    })
   }
 }

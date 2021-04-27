@@ -32,7 +32,7 @@ export default class ExpenseTypeService {
     const types = [
       { id: 1, name: 'Fixas', icon: 'food-fork-drink', limit: 60000, chartId: 'fixed' },
       { id: 2, name: 'Variáveis', icon: 'car', limit: 30000, chartId: 'variable' },
-      { id: 3, name: 'Eventuais', icon: 'tag', limit: 40000, chartId: 'eve' }
+      { id: 3, name: 'Eventuais', icon: 'tag', limit: 40000, chartId: 'event' }
     ];
 
     types.forEach(type => {
@@ -42,4 +42,7 @@ export default class ExpenseTypeService {
     return types;
   }
 
+  updateType (type) {
+    this.databaseService.updateModel(type, 'expense-types')
+  }
 }

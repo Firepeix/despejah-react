@@ -40,4 +40,39 @@ export default class ExpenseService {
     date = date.match(/\d{4}-\d{2}-\d{2}/) ? date : DatePrimitive.toISODateString(date);
     return { id: id, name: name, typeId: typeId, date: date, amount: amount };
   }
+
+  deleteExpense (id) {
+    this.databaseService.deleteModel(id, 'expenses')
+  }
+
+  /**
+   * Função que cria um orçamento de uma categoria
+   */
+  createBudget(type, expenses) {
+    const expended = expenses.reduce((value, expense) => value + expense.amount, 0)
+
+    return {
+      typeId: type.id,
+      expenses: expenses,
+      limit: type.limit,
+      expended: expended,
+      overflow: type.limit < expended,
+      filledPercentage: (expended  * 100) / type.limit,
+      chartId: type.chartId
+    }
+  }
+
+  /**
+   * Função que calcula os orçamentos baseados nas
+   * categorias de despesas e despesas
+   */
+  calculateBudgets (expenses, types) {
+    const budgets = { }
+    types.forEach(type => {
+      const budget = this.createBudget(type, expenses.filter(expense => type.id === Number(expense.typeId)));
+      budgets[budget.chartId] = budget
+    })
+
+    return budgets;
+  }
 }

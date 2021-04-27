@@ -34,6 +34,16 @@ export default class Expense extends React.Component {
     return className
   }
 
+  get expense () {
+    return {
+      id: this.props.id,
+      name: this.props.name,
+      date: this.props.date,
+      typeId: this.props.type.id,
+      amount: this.props.amount
+    }
+  }
+
   render () {
     return (
       <div className="expense">
@@ -51,13 +61,13 @@ export default class Expense extends React.Component {
           </Ripples>
           <ul className={this.menuClass} id="expense-menu" style={{ height: '97px' }}>
             <li>
-              <div className="flex items-center">
+              <div onClick={() => this.props.handleEditExpense(this.expense)} className="flex items-center">
                 <img src={pencil} alt="Editar" className="icon"/>
                 <div className="update">Editar</div>
               </div>
             </li>
             <li>
-              <div className="flex items-center">
+              <div onClick={() => this.props.handleDeleteExpense(this.props.id)} className="flex items-center">
                 <img src={minusCircle} alt="Deletar" className="icon"/>
                 <div className="delete">Deletar</div>
               </div>
