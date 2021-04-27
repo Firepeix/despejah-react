@@ -11,18 +11,35 @@ export default class Expenses extends React.Component{
     }
   }
 
+  /**
+   * Retorna o titulo da pagina
+   * @param props
+   * @return {string}
+   */
   static title (props) {
     return 'Despesas'
   }
 
+  /**
+   * Busca os tipos de despesas
+   * @return {{}|[]|any}
+   */
   get types () {
     return this.props.expenseTypeService.getExpenseTypes(true)
   }
 
+  /**
+   * Muda de pagina para ir para o formulario de edição
+   * @param expense
+   */
   editExpense = (expense) => {
     this.props.changePage(NewExpense, { savedExpense: expense })
   }
 
+  /**
+   * Deleta a despesa e seta o estado do componente
+   * @param id
+   */
   deleteExpense = (id) => {
     this.props.expenseService.deleteExpense(id)
     AlertPrimitive.success('Despesa deletada com sucesso', () => {

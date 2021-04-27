@@ -10,11 +10,20 @@ export default class ExpenseTypes extends React.Component {
       types: this.props.expenseTypeService.getExpenseTypes()
     };
   }
-
+  /**
+   * Retorna o titulo da pagina
+   * @param props
+   * @return {string}
+   */
   static title (props) {
     return 'Categorias De Despesa';
   }
 
+  /**
+   * Emite o evento e o dialogo para edição de limite do tipo de despesa
+   * @param id
+   * @param newLimit
+   */
   updateType = (id, newLimit) => {
     const type = this.state.types.find(type => type.id === id)
     if (type !== undefined) {

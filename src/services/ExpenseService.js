@@ -7,6 +7,10 @@ export default class ExpenseService {
     this.databaseService = new DatabaseService()
   }
 
+  /**
+   * Busca despesa do storage da mais nova para antiga
+   * @return {unknown[]}
+   */
   getExpenses () {
     return this.databaseService.getModels('expenses').reverse();
   }
@@ -41,6 +45,10 @@ export default class ExpenseService {
     return { id: id, name: name, typeId: typeId, date: date, amount: amount };
   }
 
+  /**
+   * Deleta uma despesa do storage
+   * @param id
+   */
   deleteExpense (id) {
     this.databaseService.deleteModel(id, 'expenses')
   }

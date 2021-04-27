@@ -4,6 +4,10 @@ import Ripples from 'react-ripples'
 
 export default class NavButton extends React.Component {
 
+  /**
+   * Retorna a classe do botão com base no seu estado
+   * @return {string}
+   */
   get buttonClass () {
     let defaultClass = 'nav-button'
     if (this.props.main) {
@@ -12,6 +16,10 @@ export default class NavButton extends React.Component {
     return defaultClass
   }
 
+  /**
+   * retorna se o botão esta ativado ou não
+   * @return {*|boolean}
+   */
   get isActive () {
     return this.props.active !== undefined ? this.props.active : true
   }

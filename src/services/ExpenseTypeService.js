@@ -42,6 +42,10 @@ export default class ExpenseTypeService {
     return types;
   }
 
+  /**
+   * Atualiza limite de um tipo de despesa
+   * @param type
+   */
   updateType (type) {
     this.databaseService.updateModel(type, 'expense-types')
   }

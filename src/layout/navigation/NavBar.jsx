@@ -7,6 +7,11 @@ import Expenses from '../../pages/Expenses';
 import NewExpense from '../../pages/NewExpense';
 
 export default class NavBar extends React.Component {
+
+  /**
+   * Emite o evento para mudar de paginas
+   * @param page
+   */
   changePages = (page) => {
     this.props.changePage(page)
   }

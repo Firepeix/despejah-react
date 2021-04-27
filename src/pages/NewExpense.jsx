@@ -24,10 +24,18 @@ export default class NewExpense extends React.Component {
     };
   }
 
+  /**
+   * Veridica se o formulario é de criação ou edição
+   * @return {boolean}
+   */
   get hasSavedExpense () {
     return this.props.savedExpense !== null && this.props.savedExpense !== undefined;
   }
 
+  /**
+   * Se for um formulario de edição retorna o id da despesa a ser editada
+   * @return {null|*}
+   */
   get savedExpenseId () {
     if (this.hasSavedExpense) {
       return this.props.savedExpense.id
@@ -35,10 +43,21 @@ export default class NewExpense extends React.Component {
     return null
   }
 
+  /**
+   * Retorna o titulo da pagina
+   * @param props
+   * @return {string}
+   */
   static title (props) {
     return props.savedExpense !== null && props.savedExpense !== undefined ? 'Despesa' : 'Nova Despesa'
   }
 
+  /**
+   * Metodo que lida com a input do usuario
+   * @param element
+   * @param name
+   * @param value
+   */
   handleInput = (element, name, value) => {
     if (value === undefined) {
       value = element.value;
@@ -52,6 +71,9 @@ export default class NewExpense extends React.Component {
     this.props.changeMainButton('saveExpense', this.saveExpense);
   }
 
+  /**
+   * Salva a despesa do formulario
+   */
   saveExpense = () => {
     if (this.validate()) {
       const expense = this.props.expenseService.makeExpense(this.savedExpenseId, this.state.name, this.state.type, this.state.date, this.state.amount);
@@ -62,6 +84,10 @@ export default class NewExpense extends React.Component {
     }
   };
 
+  /**
+   * Valida todas as inputs formulario
+   * @return {boolean}
+   */
   validate () {
     const { errors } = this.state;
     this.cleanValidation();
@@ -75,6 +101,9 @@ export default class NewExpense extends React.Component {
     return Object.values(errors).filter(error => error !== null).length < 1;
   }
 
+  /**
+   * Busca as funções de validação com base em qual input
+   */
   getValidationRules () {
     return {
       name: this.validateName,
@@ -84,6 +113,10 @@ export default class NewExpense extends React.Component {
     };
   }
 
+  /**
+   * Valida o nome
+   * @return {string|null}
+   */
   validateName = () => {
     if (this.state.name === '') {
       return 'Por favor preencha o nome da despesa!';
@@ -92,6 +125,10 @@ export default class NewExpense extends React.Component {
     return null;
   };
 
+  /**
+   * Valida o tipo
+   * @return {string|null}
+   */
   validateType = () => {
     if (isNaN(this.state.type) || this.state.type === '') {
       return 'Por favor selecione uma categoria!';
@@ -100,6 +137,10 @@ export default class NewExpense extends React.Component {
     return null;
   };
 
+  /**
+   * Valida a data
+   * @return {string|null}
+   */
   validateDate = () => {
     if (this.state.date !== '') {
       const inputDate = new Date(DatePrimitive.toISODateString(this.state.date) + ' 00:00:00');
@@ -116,6 +157,10 @@ export default class NewExpense extends React.Component {
     return 'Por favor preencha a data que a despesa ocorreu!';
   };
 
+  /**
+   * Valida o valor da despesa
+   * @return {string|null}
+   */
   validateAmount = () => {
     if (NumberPrimitive.toInt(this.state.amount) < 1) {
       return 'A despesa deve ter o valor maior que 0!';
@@ -124,6 +169,9 @@ export default class NewExpense extends React.Component {
     return null;
   };
 
+  /**
+   * Limpa a validação
+   */
   cleanValidation () {
     this.setState({
       errors: {

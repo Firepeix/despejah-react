@@ -24,6 +24,11 @@ export default class AlertPrimitive {
     AlertPrimitive.alert('success', 'Sucesso', message, 1800, onClose);
   }
 
+  /**
+   * Exibe o dialogo de edição de limite
+   * @param limit
+   * @param onClose
+   */
   static updateExpenseType (limit, onClose = null) {
     sweetAlert.fire({
       title: 'Insira novo limite.',

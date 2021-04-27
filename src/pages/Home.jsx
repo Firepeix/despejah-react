@@ -18,15 +18,26 @@ export default class Home extends React.Component {
       charts: this.defaultCharts
     };
   }
-
+  /**
+   * Retorna o titulo da pagina
+   * @return {string}
+   */
   static title () {
     return 'Home';
   }
 
+  /**
+   * Busca os tipos de despesa mas dessa vez hasheado para procura mais facil
+   * @return {{}|[]|any}
+   */
   get types () {
     return this.props.expenseTypeService.getExpenseTypes(true)
   }
 
+  /**
+   * Retorna os valores padrões dos graficos e suas opções para cada tipo
+   * @return {{}}
+   */
   get defaultCharts () {
     const configurations = { fixed: { color: '#0c59cf' }, variable: { color: '#e61610' }, event: { color: '#606060' } }
     const charts = {}
@@ -75,6 +86,10 @@ export default class Home extends React.Component {
     return charts;
   }
 
+  /**
+   * Mosta o componente do resumo de despesa para as tres maiores despesas
+   * @return {*}
+   */
   get biggestExpenses () {
     return this.state.biggestExpenses.map(expense => (
       <ExpenseResume key={expense.id} name={expense.name} type={this.types[expense.typeId]} amount={expense.amount}/>
@@ -85,6 +100,9 @@ export default class Home extends React.Component {
     this.updateChart()
   }
 
+  /**
+   * Atualiza com valores reais os valores dos graficos
+   */
   updateChart () {
     const chartIds = ['fixed', 'variable', 'event' ]
     const charts = this.state.charts;
@@ -95,6 +113,10 @@ export default class Home extends React.Component {
     this.setState({ charts })
   }
 
+  /**
+   * Busca se algum orçamento ficou ultrapassou o limite
+   * @return {boolean}
+   */
   get hasOverflow () {
     return Object.values(this.state.budgets).filter(budget => budget.overflow).length > 0
   }

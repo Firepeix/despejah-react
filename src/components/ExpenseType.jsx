@@ -13,11 +13,17 @@ export default class ExpenseType extends React.Component {
     };
   }
 
-
+  /**
+   * Abre ou fecha o menu com base no seu estado
+   */
   toggleMenu = () => {
     this.setState({ menuIsOpened: !this.state.menuIsOpened });
   };
 
+  /**
+   * Tabela HASH que retorna o icone svg a partir do id
+   * @return {{'food-fork-drink', car, tag}}
+   */
   get expenseTypeIcons () {
     return {
       'food-fork-drink': foodForkDrink,
@@ -26,6 +32,10 @@ export default class ExpenseType extends React.Component {
     };
   }
 
+  /**
+   * Retorna a classe do menu com base no seu estado
+   * @return {string}
+   */
   get menuClass () {
     let className = 'menu';
     if (!this.state.menuIsOpened) {
@@ -34,6 +44,9 @@ export default class ExpenseType extends React.Component {
     return className;
   }
 
+  /**
+   * Atualiza o limite do pai com base na função prop do pai
+   */
   updateTypeAmount = () => {
     this.toggleMenu()
     AlertPrimitive.updateExpenseType(this.props.limit, limit => {

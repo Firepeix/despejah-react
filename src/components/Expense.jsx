@@ -14,6 +14,10 @@ export default class Expense extends React.Component {
     }
   }
 
+  /**
+   * Tabela HASH que retorna o icone svg a partir do id
+   * @return {{'food-fork-drink', car, tag}}
+   */
   get expenseTypeIcons () {
     return {
       'food-fork-drink': foodForkDrink,
@@ -22,10 +26,17 @@ export default class Expense extends React.Component {
     };
   }
 
+  /**
+   * Ativa ou desativa o menu
+   */
   toggleMenu = () => {
     this.setState({ menuIsOpened: !this.state.menuIsOpened })
   }
 
+  /**
+   * Retorna a classe do menu baseado em seu estado
+   * @return {string}
+   */
   get menuClass () {
     let className = 'menu'
     if (!this.state.menuIsOpened) {
@@ -34,6 +45,10 @@ export default class Expense extends React.Component {
     return className
   }
 
+  /**
+   * Busca o modelo da Expense com base nas propriedades
+   * @return {{date, amount, name, typeId, id}}
+   */
   get expense () {
     return {
       id: this.props.id,
